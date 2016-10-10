@@ -4,6 +4,8 @@
 package de.i3mainz.openballoonmap.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +21,7 @@ import de.i3mainz.openballoonmap.exceptions.BalloonAlreadyUsedException;
 import de.i3mainz.openballoonmap.exceptions.BalloonNotExistsException;
 import de.i3mainz.openballoonmap.model.Balloon;
 import de.i3mainz.openballoonmap.model.Event;
+import de.i3mainz.openballoonmap.model.EventBalloon;
 import de.i3mainz.openballoonmap.model.Find;
 import de.i3mainz.openballoonmap.repository.BalloonRepository;
 import de.i3mainz.openballoonmap.repository.EventRepository;
@@ -53,6 +56,22 @@ public class DBService {
 			return balloon;
 		}).collect(Collectors.toList()));
 		return eventRepository.save(event).getBalloons();
+	}
+
+	public Collection<EventBalloon> insertEventAndReturnEventBalloons(String name, String location, double lon,
+			double lat, Date timestamp, int balloons) throws SQLException {
+		Event event = new Event();
+		event.setName(name);
+		event.setDatum(timestamp);
+		event.setLocation(location);
+		event.setGeom(geomFac.createPoint(new Coordinate(lat, lon)));
+		event.setBalloons(Stream.generate(() -> (int) (Utils.MAX_NR * Math.random())).limit(balloons).map(nr -> {
+			Balloon balloon = new Balloon();
+			balloon.setEvent(event);
+			balloon.setNr(nr);
+			return balloon;
+		}).collect(Collectors.toList()));
+		return this.createEventballoons(eventRepository.save(event));
 	}
 
 	public void deleteEvent(String name) throws SQLException {
@@ -91,5 +110,15 @@ public class DBService {
 
 	public Find getBalloonData(int ballooncode) throws SQLException {
 		return findRepository.findByBalloon_nr(ballooncode);
+	}
+
+	public Collection<EventBalloon> getEventBalloons(String name) throws SQLException {
+		return this.createEventballoons(this.getEvent(name));
+	}
+
+	private Collection<EventBalloon> createEventballoons(Event event) {
+		return event.getBalloons().stream()
+				.map(b -> new EventBalloon(Utils.intToCodeString(b.getNr()), event.getName()))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 }
