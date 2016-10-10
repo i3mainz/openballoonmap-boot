@@ -14,6 +14,5 @@ import de.i3mainz.openballoonmap.model.Find;
 public interface FindRepository extends CrudRepository<Find, Long> {
 
 	public Find findByBalloon_id(int balloon);
-
 	public Find findByBalloon_nr(int ballooncode);
 }
