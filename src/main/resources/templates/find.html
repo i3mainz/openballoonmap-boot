@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Open Balloon Map | Balloon gefunden</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="img/favicons.png" type="image/png" />
+		<link rel="icon" href="img/favicons.png" type="image/png" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="/webjars/jquery-ui/1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"/>
+		<link rel="stylesheet" href="http://tompi.github.io/jeoquery/jeoquery.css" />
+		<script src="/webjars/webcomponentsjs/0.7.22/webcomponents-lite.min.js"></script>
+		<link rel="import" href="/elements/piwik-element.html" />
+		<script src="/webjars/jquery/1.10.2/jquery.min.js"></script>
+		<script src="/webjars/jquery-ui/1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>
+		<script src="js/jeoquery.js"></script>
+		<script src="js/cryptmail.js"></script>
+		<script th:inline="javascript">
+			// <![CDATA[
+			var init = function() {
+				jeoquery.defaultData.userName = 'tompi';
+				$("#location").jeoCityAutoComplete({callback: setCity});
+				$("#timestamp").datepicker({dateFormat: "yy-mm-dd"});
+			};
+			var setCity = function(city) {
+				$("#lon").val(city.lng);
+				$("#lat").val(city.lat);
+			};
+			var validate = function() {
+				if ($("#nr").val() && $("#location").val() && $("#lat").val() && $("#timestamp").val())
+					return true;
+				alert("Bitte alle drei Felder mit korrekten Werten belegen!");
+				return false;
+			};
+			  // ]]>
+		</script>
+		<script th:inline="javascript">
+			var OPENBALLOON_URI = "";
+		</script>
+	</head>
+
+	<body onload="init()">
+
+		<div class="content">
+			<div class="top_block header">
+				<div class="link2"><a class="header" href="http://i3mainz.hs-mainz.de/impressum" target="_blank">Impressum</a></div>
+				<div class="link1"><a class="header" href="http://i3mainz.hs-mainz.de/de/projekte/openballoonmap" target="_blank">About</a></div>
+			</div>
+			<div class="logos">
+				<div class="logo"><a href="http://i3mainz.hs-mainz.de" target="_blank"></a></div>
+				<div class="obm">Open Balloon Map</div>
+			</div>
+			<form accept-charset="utf-8" th:action="@{/AddFind}" method="post" onsubmit="return validate()">
+				<input name="lon" id="lon" type="hidden" />
+				<input name="lat" id="lat" type="hidden" />
+				<b>Balloon gefunden?</b><br /><br />
+				Balloon-Code<br />
+				<input class="center" name="nr" id="nr" /> <br />
+				Wo wurde der <br />
+				Balloon gefunden? <br />
+				<input class="left" name="location" id="location" /> <br />
+				Wann war das? <br />
+				<input class="center" name="timestamp" id="timestamp" /> <br />
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input type="submit" value="Balloon-Fund mitteilen" />
+			</form>
+			<form class="info">
+				<b>Probleme?</b><br /><br />
+				Kontaktieren Sie uns per <a href="javascript:mailto('gmpsjbo/uijfszAgi.nbjo%7B/ef')">Email</a><br />
+			</form>
+			<form class="info">
+				<b>Ort nicht gefunden?</b><br /><br />
+				Tragen Sie bitte einen gr&ouml;&szlig;eren Ort in der N&auml;he ein.<br />
+			</form>
+		</div>
+		<piwik-tracker piwikUrl="piwik.hs-mainz.de" siteId="5"/>
+	</body>
+</html>

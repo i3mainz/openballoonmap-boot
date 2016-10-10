@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<title>OpenBalloonMap-Login</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="img/favicons.png" type="image/png" />
+		<link rel="icon" href="img/favicons.png" type="image/png" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="content">
+			<div class="top_block header">
+				<div class="link2">
+					<a class="header" href="http://i3mainz.hs-mainz.de/impressum"
+						target="_blank">Impressum</a>
+				</div>
+				<div class="link1">
+					<a class="header"
+						href="http://i3mainz.hs-mainz.de/de/projekte/openballoonmap"
+						target="_blank">About</a>
+				</div>
+			</div>
+			<div class="logos">
+				<div class="logo">
+					<a href="http://i3mainz.hs-mainz.de" target="_blank"></a>
+				</div>
+				<div class="obm">Open Balloon Map</div>
+			</div>
+			<div th:if="${param.error}">Invalid username and password.</div>
+			<div th:if="${param.logout}">You have been logged out.</div>
+			<form th:action="@{/login}" method="post">
+				<div>
+					<label> User Name : <input type="text" name="username" />
+					</label>
+				</div>
+				<div>
+					<label> Password: <input type="password" name="password" />
+					</label>
+				</div>
+				<div>
+					<input type="submit" value="Sign In" />
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
