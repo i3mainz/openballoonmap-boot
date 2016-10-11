@@ -19,6 +19,7 @@ import de.i3mainz.openballoonmap.service.Utils;
 
 /**
  * @author Nikolai Bock
+ * @author Florian Thiery
  *
  */
 @Controller
@@ -37,9 +38,7 @@ public class MainController {
 		model.addAttribute("geoserverURL", BASEURL);
 
 		try {
-			if ((bc == null || bc.isEmpty()) && (ev == null || ev.isEmpty())) {
-				// setze keinen weiterer Parameter
-			} else if (bc != null) {
+			if (bc != null && !bc.isEmpty()) {
 				Find data = service.getBalloonData(Utils.codeStringToInt(bc));
 
 				if (data != null) {
@@ -51,7 +50,7 @@ public class MainController {
 				} else {
 					model.addAttribute("function", "noBalloon");
 				}
-			} else if (ev != null) {
+			} else if (ev != null && !ev.isEmpty()) {
 				Event event = service.getEvent(ev);
 				if (event != null) {
 					model.addAttribute("event", ev);

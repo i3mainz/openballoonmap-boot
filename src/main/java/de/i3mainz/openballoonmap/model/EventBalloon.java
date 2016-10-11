@@ -6,7 +6,7 @@ package de.i3mainz.openballoonmap.model;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * @author nikolai.bock
+ * @author Nikolai Bock
  *
  */
 @JsonPropertyOrder({"id", "event"})

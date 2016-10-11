@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import de.i3mainz.openballoonmap.converter.CSVMessageConverter;
 
+/**
+ * @author Nikolai Bock
+ *
+ */
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 

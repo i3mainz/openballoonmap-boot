@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import de.i3mainz.openballoonmap.model.Balloon;
 
 /**
- * @author nikolai.bock
+ * @author Nikolai Bock
  *
  */
 public interface BalloonRepository extends CrudRepository<Balloon, Long> {

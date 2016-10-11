@@ -5,8 +5,6 @@ package de.i3mainz.openballoonmap.service;
  *
  * @author Martin Unold M.Sc.
  * @author Florian Thiery M.Sc.
- * @author i3mainz - Institute for Spatial Information and Surveying Technology
- * @version 04.05.2015
  */
 public interface Utils {
 

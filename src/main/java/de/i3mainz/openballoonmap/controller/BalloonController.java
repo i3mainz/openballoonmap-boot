@@ -11,6 +11,7 @@ import de.i3mainz.openballoonmap.service.Utils;
 
 /**
  * @author Nikolai Bock
+ * @author Florian Thiery
  *
  */
 @RestController

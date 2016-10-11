@@ -22,7 +22,7 @@ import de.i3mainz.openballoonmap.service.DBService;
 
 /**
  * @author Nikolai Bock
- *
+ * @author Florian Thiery
  */
 @RestController
 public class EventController {

@@ -29,6 +29,7 @@ import de.i3mainz.openballoonmap.repository.FindRepository;
 
 /**
  * @author Nikolai Bock
+ * @author Martin Unold
  *
  */
 @Service

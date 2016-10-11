@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author Florian Thiery M.Sc.
+ * @author Florian Thiery
  * @author Nikolai Bock
  *
  */

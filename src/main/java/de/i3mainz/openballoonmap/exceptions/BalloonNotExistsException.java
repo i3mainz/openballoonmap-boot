@@ -4,7 +4,7 @@
 package de.i3mainz.openballoonmap.exceptions;
 
 /**
- * @author nikolai.bock
+ * @author Nikolai Bock
  *
  */
 public class BalloonNotExistsException extends Exception {
