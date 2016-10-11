@@ -2,13 +2,15 @@
 
 Geoinformation für alle – Luftballons im Dienste der Wissenschaft. Unter dem Motto "OpenBalloonMap" vermittelt das i3mainz Grundlagen der Geoinformatik und präsentiert Projekte aus der Umwelt- und Gesundheitsforschung. Die ersten Ergebnisse sind auf der Projektwebsite "openballoonmap.org" einsehbar.
 
-**OpenBallonMap** is a free available balloonmap using Java / JavaScript / JSP and a PostGIS / GeoServer connection.
+**OpenBallonMap** is a free available balloonmap using Java (Spring Boot, Spring MVC, Spring Data JPA, Hibernate Spatial, Spring Security, ...) / JavaScript (leaflet, jQuery, ...) / Thymeleaf and a PostGIS / GeoServer connection.
 
 Here, the sourcecode of the server and client application is published.
 
-The "openballoon" folder is a Netbeans project, if you build it, you will get a WAR file. Run it as "ROOT".
+The project builds on top of Spring Boot and generates fully runable JAR file.  
 
-You have to run this WAR file in an Apache Tomcat using a PostgreSQL / PostGIS 2.x database (with an bunch of existing tables and configure the properties in the config.properties file. You need also a GeoServer that gives the data via a WMS / WFS interface.
+You have to run this JAR file:
+java -jar JAR-FILE 
+The configuration can be changed through application.properties or application.yml file, also setting environment variables or add properties to the java run call. Database tables can be build or updated via JPA functionality automatically. Please configure this also through the parameter. More you find in the reference of [Spring Boot](https://projects.spring.io/spring-boot/). 
 
 Want to see the app? [See the application.](http://openballoonmap.org)
 
@@ -27,6 +29,8 @@ Copyright (c) 2016 [i3mainz](http://i3mainz.hs-mainz.de/en/institute)**
 **Martin Unold M.Sc.
 
 **Axel Kunz M.Sc.
+
+**Nikolai Bock M.Eng.
 
 **[i3mainz](http://i3mainz.hs-mainz.de/en/institute) - Institute for Spatial Information and Surveying Technology
 
