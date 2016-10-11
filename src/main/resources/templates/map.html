@@ -1,0 +1,61 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Open Balloon Map | Luftpost im Web - Geoinformation für alle</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="img/favicons.png" type="image/png" />
+		<link rel="icon" href="img/favicons.png" type="image/png" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="/webjars/jquery-ui/1.9.1/css/smoothness/jquery-ui-1.9.1.custom.min.css"/>
+		<link rel="stylesheet" href="/webjars/leaflet/0.7.7/leaflet.css" />
+		<link rel="stylesheet" href="css/MarkerCluster.css" />
+		<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+		<link rel="stylesheet" href="css/leaflet-measure.css" />
+		<link rel="stylesheet" href="css/L.Control.MousePosition.css" />
+		<script type="text/javascript" src="/webjars/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="/webjars/jquery-ui/1.9.1/js/jquery-ui-1.9.1.custom.min.js"></script>
+		<script src="/webjars/webcomponentsjs/0.7.22/webcomponents-lite.min.js"></script>
+		<link rel="import" href="/elements/piwik-element.html" />
+		<script type="text/javascript" src="/webjars/leaflet/0.7.7/leaflet.js"></script>
+		<script type="text/javascript" src="js/leaflet.markercluster-src.js"></script>
+		<script type="text/javascript" src="js/Leaflet.singletilewms.js"></script>
+		<script type="text/javascript" src="js/Control.FullScreen.js"></script>
+		<script type="text/javascript" src="js/leaflet-measure.js"></script>
+		<script type="text/javascript" src="js/L.Control.MousePosition.js"></script>
+		<script type="text/javascript" src="js/map.js"></script>
+		<script type="text/javascript" src="js/addContent.js"></script>
+	</head>
+	<body>
+		<div class="content">
+			<div class="top_block header">
+				<div class="lupe"><a href="javaScript:search();"></a></div>
+				<div class="search">
+					<input id="ballooncode" type="text" maxlength="12" class="searchinput" value="Code eingeben" 
+						th:onFocus="'if (this.value != \'\') {this.value = \'\';this.style.backgroundColor = \'#dbdbdb\';}'" 
+						th:onkeydown="'if (event.keyCode == 13) { search();return false;}'"
+					/>
+				</div>
+				<div class="link2"><a class="header" href="http://i3mainz.hs-mainz.de/impressum" target="_blank">Impressum</a></div>
+				<div class="link1"><a class="header" href="http://i3mainz.hs-mainz.de/de/projekte/openballoonmap" target="_blank">About</a></div>
+			</div>
+			<div class="logos">
+				<div class="logo"><a href="http://i3mainz.hs-mainz.de" target="_blank"></a></div>
+				<div class="obm" id="obm">Open Balloon Map</div>
+			</div>
+			<div class="background map" id="map"></div>	
+		</div>
+		<piwik-tracker piwikUrl="piwik.hs-mainz.de" siteId="5"/>
+	</body>
+
+	<script th:inline="javascript">
+		var GET_EVENT = [[${event}]];
+		var GET_LAT = [[${lat}]];
+		var GET_LON = [[${lon}]];
+		var GET_FUNCTION = [[${function}]];
+		var GET_NR = [[${nr}]];
+		var GEOSERVER_URL = [[${geoserverURL}]];
+		var GEOSERVER_WMS = GEOSERVER_URL+"/openballoon/wms";
+		createTraj();
+		createMap();
+    </script>
+</html>

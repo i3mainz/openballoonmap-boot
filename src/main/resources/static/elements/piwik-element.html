@@ -1,0 +1,42 @@
+<link rel="import" href="/webjars/polymer/1.6.1/polymer.html">
+
+<dom-module id="piwik-tracker">
+	<template>
+		<noscript><p><img src="//{{piwikUrl}}/piwik.php?idsite={{siteId}}" style="border:0;" alt="" /></p></noscript>
+	</template>
+	<script>
+	  // element registration
+	  Polymer({
+	    is: "piwik-tracker",	
+	    properties: {
+	      // declare properties for the element's public API
+	      piwikUrl: {
+	        type: String,
+	        value: "piwik.hs-mainz.de"
+	      },
+	      siteId: {
+	      	type: String,
+	      	value: "5"
+	      }
+	    },
+	    ready: function() {
+	  	  var _paq = _paq || [];
+	        _paq.push(["trackPageView"]);
+	        _paq.push(["enableLinkTracking"]);
+	        var _piwikUrl = this.piwikUrl;
+	        var _siteId = this.siteId;
+	        (function () {
+	            var u = "//" + _piwikUrl + "/";
+	            _paq.push(["setTrackerUrl", u + "piwik.php"]);
+	            _paq.push(["setSiteId", _siteId]);
+	            var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
+	            g.type = "text/javascript";
+	            g.defer = true;
+	            g.async = true;
+	            g.src = u + "piwik.js";
+	            s.parentNode.insertBefore(g, s);
+	        })();
+	    }
+	  });
+	</script>
+</dom-module>
