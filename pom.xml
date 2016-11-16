@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker.image.name>registry.gitlab.i3mainz.hs-mainz.de/openballoonmap/portal</docker.image.name>
 	</properties>
 
 	<dependencies>
@@ -104,6 +105,23 @@
 				<groupId>com.rimerosolutions.maven.plugins</groupId>
 				<artifactId>wrapper-maven-plugin</artifactId>
 				<version>0.0.5</version>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.11</version>
+				<configuration>
+					<imageName>${docker.image.name}</imageName>
+					<useConfigFile>true</useConfigFile>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
