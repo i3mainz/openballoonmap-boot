@@ -49,8 +49,7 @@ public class CSVMessageConverter extends AbstractHttpMessageConverter<Collection
 		m.getHeaders().add(HttpHeaders.CONTENT_TYPE, TEXT_CSV);
 
 		CsvMapper mapper = new CsvMapper();
-		CsvSchema schema = mapper.schemaFor(EventBalloon.class);
-		schema = schema.withColumnSeparator(';');
+		CsvSchema schema = mapper.schemaFor(EventBalloon.class).withColumnSeparator(';');
 		ObjectWriter myObjectWriter = mapper.writer(schema);
 		myObjectWriter.writeValue(m.getBody(), t);
 	}
