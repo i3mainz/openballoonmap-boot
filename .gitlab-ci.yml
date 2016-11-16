@@ -1,0 +1,42 @@
+image: docker:git 
+services:   
+  - docker:dind
+
+variables:
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  IMAGE_NAME: "registry.gitlab.i3mainz.hs-mainz.de/openballoonmap/portal:latest"
+  
+# Cache downloaded dependencies and plugins between builds.
+cache:
+  paths:
+    - .m2/
+
+stages:
+ - build
+ - upload
+
+build:
+  image: maven:3-jdk-8
+  stage: build
+  artifacts:
+    paths:
+      - target/*.jar
+  script:
+   - echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                            https://maven.apache.org/xsd/settings-1.0.0.xsd">
+                <localRepository>'$PWD'.m2</localRepository>
+          </settings>' > $HOME/.m2/settings.xml
+   - mvn clean package
+
+upload:
+  stage: upload
+  script:
+    - cp target/*.jar src/main/docker
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.i3mainz.hs-mainz.de
+    - docker build -t $IMAGE_NAME src/main/docker
+    - docker push $IMAGE_NAME
+  only:
+    - master
