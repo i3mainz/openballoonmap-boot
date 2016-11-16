@@ -33,6 +33,8 @@ build:
 
 upload:
   stage: upload
+  tags:     
+    - docker
   script:
     - cp target/*.jar src/main/docker
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.i3mainz.hs-mainz.de
