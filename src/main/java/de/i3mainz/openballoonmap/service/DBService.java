@@ -45,22 +45,17 @@ public class DBService {
 
 	public Iterable<Balloon> insertEvent(String name, String location, double lon, double lat, Date timestamp,
 			int balloons) throws SQLException {
-		Event event = new Event();
-		event.setName(name);
-		event.setDatum(timestamp);
-		event.setLocation(location);
-		event.setGeom(geomFac.createPoint(new Coordinate(lat, lon)));
-		event.setBalloons(Stream.generate(() -> (int) (Utils.MAX_NR * Math.random())).limit(balloons).map(nr -> {
-			Balloon balloon = new Balloon();
-			balloon.setEvent(event);
-			balloon.setNr(nr);
-			return balloon;
-		}).collect(Collectors.toList()));
+		Event event = buildEvent(name, location, lon, lat, timestamp, balloons);
 		return eventRepository.save(event).getBalloons();
 	}
 
 	public Collection<EventBalloon> insertEventAndReturnEventBalloons(String name, String location, double lon,
 			double lat, Date timestamp, int balloons) throws SQLException {
+		Event event = buildEvent(name, location, lon, lat, timestamp, balloons);
+		return this.createEventballoons(eventRepository.save(event));
+	}
+
+	private Event buildEvent(String name, String location, double lon, double lat, Date timestamp, int balloons) {
 		Event event = new Event();
 		event.setName(name);
 		event.setDatum(timestamp);
@@ -72,7 +67,7 @@ public class DBService {
 			balloon.setNr(nr);
 			return balloon;
 		}).collect(Collectors.toList()));
-		return this.createEventballoons(eventRepository.save(event));
+		return event;
 	}
 
 	public void deleteEvent(String name) throws SQLException {
@@ -88,13 +83,18 @@ public class DBService {
 		if (balloon.getFind() != null) {
 			throw new BalloonAlreadyUsedException();
 		}
+		Find find = buildFind(location, lon, lat, timestamp, remark, balloon);
+		return findRepository.save(find);
+	}
+
+	private Find buildFind(String location, double lon, double lat, Date timestamp, String remark, Balloon balloon) {
 		Find find = new Find();
 		find.setBalloon(balloon);
 		find.setDatum(timestamp);
 		find.setGeom(geomFac.createPoint(new Coordinate(lat, lon)));
 		find.setLocation(location);
 		find.setRemark(remark);
-		return findRepository.save(find);
+		return find;
 	}
 
 	public Event getEvent(String name) throws SQLException {
