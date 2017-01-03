@@ -52,14 +52,14 @@ public class EventController {
 	}
 
 	@PostMapping(path = "/clearEvent")
-	public String delete(@RequestParam(name = "name") String name) throws Exception {
+	public void delete(@RequestParam(name = "name") String name, HttpServletResponse response) throws Exception {
 		service.deleteEvent(name);
-		return "redirect:/map";
+		response.sendRedirect("event");
 	}
 
 	@PostMapping(path = "/clearAllEvents")
-	public String deleteAll() throws Exception {
+	public void deleteAll(HttpServletResponse response) throws Exception {
 		service.deleteAllEvents();
-		return "redirect:/map";
+		response.sendRedirect("event");
 	}
 }
