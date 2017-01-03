@@ -43,8 +43,8 @@ public class MainController {
 
 				if (data != null) {
 					model.addAttribute("event", data.getBalloon().getEvent().getName());
-					model.addAttribute("lat", data.getGeom().getCentroid().getX());
-					model.addAttribute("lon", data.getGeom().getCentroid().getY());
+					model.addAttribute("lat", data.getGeom().getCentroid().getY());
+					model.addAttribute("lon", data.getGeom().getCentroid().getX());
 					model.addAttribute("function", "showBalloon");
 					model.addAttribute("nr", Utils.codeStringToInt(bc));
 				} else {
