@@ -60,7 +60,7 @@ public class DBService {
 		event.setName(name);
 		event.setDatum(timestamp);
 		event.setLocation(location);
-		event.setGeom(geomFac.createPoint(new Coordinate(lat, lon)));
+		event.setGeom(geomFac.createPoint(new Coordinate(lon, lat)));
 		event.setBalloons(Stream.generate(() -> (int) (Utils.MAX_NR * Math.random())).limit(balloons).map(nr -> {
 			Balloon balloon = new Balloon();
 			balloon.setEvent(event);
@@ -91,7 +91,7 @@ public class DBService {
 		Find find = new Find();
 		find.setBalloon(balloon);
 		find.setDatum(timestamp);
-		find.setGeom(geomFac.createPoint(new Coordinate(lat, lon)));
+		find.setGeom(geomFac.createPoint(new Coordinate(lon, lat)));
 		find.setLocation(location);
 		find.setRemark(remark);
 		return find;
