@@ -1,5 +1,7 @@
 package de.i3mainz.openballoonmap.configuration;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.annotation.Configuration;
@@ -23,11 +25,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Build the request matcher for CSFR
 		RequestMatcher csrfRequestMatcher = new RequestMatcher() {
 
+			// Always allow the HTTP GET method
+			private Pattern allowedMethods = Pattern.compile("^GET$");
+			
 			// Disable CSFR protection on the following urls:
 			private AntPathRequestMatcher[] requestMatchers = { new AntPathRequestMatcher("/events/**") };
 
 			@Override
 			public boolean matches(HttpServletRequest request) {
+				
+			    // Skip allowed methods
+			    if (allowedMethods.matcher(request.getMethod()).matches()) {
+			      return false;
+			    }   
 
 				for (AntPathRequestMatcher rm : requestMatchers) {
 					if (rm.matches(request)) {
