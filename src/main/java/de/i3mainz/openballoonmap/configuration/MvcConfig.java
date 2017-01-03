@@ -20,7 +20,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
     	registry.addRedirectViewController("/", "/map");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/createEvent").setViewName("event");
+        registry.addViewController("/event").setViewName("event");
         registry.addViewController("/ballooncodeerror").setViewName("ballooncodeerror");
         registry.addViewController("/find").setViewName("find");
     }

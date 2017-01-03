@@ -250,3 +250,7 @@ input.center {
 	margin-bottom: 2em; 
 	width: 85%;
 }
+
+.btncontainer {
+    text-align: center;
+}

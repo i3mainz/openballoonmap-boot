@@ -1,39 +1,65 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Add Event</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" href="img/favicons.png" type="image/png" />
-		<link rel="icon" href="img/favicons.png" type="image/png" />
-		<link rel="stylesheet" href="css/style.css"/>
-	</head>
+<head>
+<title>Add Event</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="img/favicons.png" type="image/png" />
+<link rel="icon" href="img/favicons.png" type="image/png" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
 
-	<body>
+<body>
 
-		<div class="content">
-			<div class="top_block header">
-				<div class="link2"><a class="header" href="http://i3mainz.hs-mainz.de/impressum" target="_blank">Impressum</a></div>
-				<div class="link1"><a class="header" href="http://i3mainz.hs-mainz.de/de/projekte/openballoonmap" target="_blank">About</a></div>
+	<div class="content">
+		<div class="top_block header">
+			<div class="link2">
+				<a class="header" href="http://i3mainz.hs-mainz.de/impressum"
+					target="_blank">Impressum</a>
 			</div>
-			<div class="logos">
-				<div class="logo"><a href="http://i3mainz.hs-mainz.de" target="_blank"></a></div>
-				<div class="obm">Open Balloon Map</div>
+			<div class="link1">
+				<a class="header"
+					href="http://i3mainz.hs-mainz.de/de/projekte/openballoonmap"
+					target="_blank">About</a>
 			</div>
-			<form th:action="@{/AddEvent}" method="post" class="info2">
-				Eventname: <input name="name" value="Eventname" /><i> Keine Umlaute oder Sonderzeichen!</i><br />
-				Timestamp: <input name="timestamp" /><i> Format: YYYY-MM-TT hh:mm:ss</i><br />
-				Menge: <input name="balloons" value="50" /><i> max. 1000</i><br />
-				Ort: <input name="location" value="Mainz, Hochschule Campus" /><br />
-				Lon: <input name="lon" /><i> Trennzeichen: Punkt</i><br />
-				Lat: <input name="lat" /><i> Trennzeichen: Punkt</i><br /><br />
-				<center><input type="submit" value="Anlegen" /></center>
-			</form>
-			<form class="info">
-				<b>Zur Map?</b><br /><br />
-				<a th:href="@{/map}">Hier lang!</a><br />
-			</form>
 		</div>
+		<div class="logos">
+			<div class="logo">
+				<a href="http://i3mainz.hs-mainz.de" target="_blank"></a>
+			</div>
+			<div class="obm">Open Balloon Map</div>
+		</div>
+		<form th:action="@{/AddEvent}" method="post" class="info2">
+			Eventname: <input name="name" value="Eventname" /><i> Keine
+				Umlaute oder Sonderzeichen!</i><br /> Timestamp: <input
+				name="timestamp" /><i> Format: YYYY-MM-TT hh:mm:ss</i><br />
+			Menge: <input name="balloons" value="50" /><i> max. 1000</i><br />
+			Ort: <input name="location" value="Mainz, Hochschule Campus" /><br />
+			Lon: <input name="lon" /><i> Trennzeichen: Punkt</i><br /> Lat: <input
+				name="lat" /><i> Trennzeichen: Punkt</i><br />
+			<br />
+			<div class="btncontainer">
+				<input type="submit" value="Anlegen" />
+			</div>
+		</form>
+		<form th:action="@{/clearEvent}" method="post" class="info2">
+			Eventname: <input name="name" value="Eventname" /><i> Keine
+				Umlaute oder Sonderzeichen!</i><br />
+			<br />
+			<div class="btncontainer">
+				<input type="submit" value="Event löschen" />
+			</div>
+		</form>
+		<form th:action="@{/clearAllEvents}" method="post" class="info2">
+			<div class="btncontainer">
+				<input type="submit" value="Alle Events löschen" />
+			</div>
+		</form>
+		<form class="info">
+			<b>Zur Map?</b><br />
+			<br /> <a th:href="@{/map}">Hier lang!</a><br />
+		</form>
+	</div>
 
-	</body>
+</body>
 </html>
 

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,13 +51,15 @@ public class EventController {
 
 	}
 
-	@DeleteMapping(path = "/events/{name}")
-	public void delete(@PathVariable(name = "name") String name) throws Exception {
+	@PostMapping(path = "/clearEvent")
+	public String delete(@RequestParam(name = "name") String name) throws Exception {
 		service.deleteEvent(name);
+		return "redirect:/map";
 	}
 
-	@DeleteMapping(path = "/events")
-	public void delete() throws Exception {
+	@PostMapping(path = "/clearAllEvents")
+	public String deleteAll() throws Exception {
 		service.deleteAllEvents();
+		return "redirect:/map";
 	}
 }
