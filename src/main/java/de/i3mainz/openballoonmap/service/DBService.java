@@ -74,6 +74,10 @@ public class DBService {
 		eventRepository.deleteByName(name);
 	}
 
+	public void deleteAllEvents() {
+		eventRepository.deleteAll();
+	}
+
 	public Find insertFind(int nr, String location, double lon, double lat, Date timestamp, String remark)
 			throws BalloonNotExistsException, BalloonAlreadyUsedException {
 		Balloon balloon = balloonRepository.findByNr(nr);
