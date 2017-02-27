@@ -4,6 +4,8 @@ Geoinformation für alle – Luftballons im Dienste der Wissenschaft. Unter dem 
 
 **OpenBallonMap** is a free available balloonmap using Java (Spring Boot, Spring MVC, Spring Data JPA, Hibernate Spatial, Spring Security, ...) / JavaScript (leaflet, jQuery, ...) / Thymeleaf and a PostGIS / GeoServer connection.
 
+This is a new version of https://github.com/i3mainz/OpenBalloonMap using the Spring software stack.
+
 Here, the sourcecode of the server and client application is published.
 
 The project builds on top of Spring Boot and generates fully runable JAR file.  
