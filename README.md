@@ -1,5 +1,7 @@
 # Open Balloon Map
 
+[![Build Status](https://travis-ci.com/i3mainz/openballoonmap-boot.svg?branch=master)](https://travis-ci.com/i3mainz/openballoonmap-boot)
+
 Geoinformation für alle – Luftballons im Dienste der Wissenschaft. Unter dem Motto "OpenBalloonMap" vermittelt das i3mainz Grundlagen der Geoinformatik und präsentiert Projekte aus der Umwelt- und Gesundheitsforschung. Die ersten Ergebnisse sind auf der Projektwebsite "openballoonmap.org" einsehbar.
 
 **OpenBallonMap** is a free available balloonmap using Java (Spring Boot, Spring MVC, Spring Data JPA, Hibernate Spatial, Spring Security, ...) / JavaScript (leaflet, jQuery, ...) / Thymeleaf and a PostGIS / GeoServer connection.
