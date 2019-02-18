@@ -5,7 +5,7 @@ services:
 variables:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
-  IMAGE_NAME: "registry.gitlab.i3mainz.hs-mainz.de/openballoonmap/portal:latest"
+  IMAGE_NAME: "registry.gitlab.rlp.net/openballoonmap/portal:latest"
   
 # Cache downloaded dependencies and plugins between builds.
 cache:
@@ -37,7 +37,7 @@ upload:
     - docker
   script:
     - cp target/*.jar src/main/docker
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.i3mainz.hs-mainz.de
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.rlp.net
     - docker build -t $IMAGE_NAME src/main/docker
     - docker push $IMAGE_NAME
   only:
